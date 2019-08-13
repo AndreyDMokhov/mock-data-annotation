@@ -1,21 +1,20 @@
 package com.naya.mock_data_annotation.annotation.inject_random.handlers;
 
 
-import com.github.javafaker.service.FakeValuesService;
-import com.github.javafaker.service.RandomService;
+import com.github.javafaker.Faker;
 import com.naya.mock_data_annotation.annotation.inject_random.MockDataType;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Locale;
-
 @Service
+@AllArgsConstructor
 public class EmailMockRandomDataHandlerImpl implements MockRandomDataHandler {
+
+    private Faker faker;
 
     @Override
     public String data() {
-        FakeValuesService fakeValuesService = new FakeValuesService(new Locale("en-US"), new RandomService());
-
-        return fakeValuesService.bothify("????##@ya.com");
+        return faker.internet().emailAddress();
     }
 
     @Override
